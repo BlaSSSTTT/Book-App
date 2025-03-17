@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Book</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="flex-body">
+
+<h1>Create New Book</h1>
+
+<form th:action="@{/books/create}" th:object="${newBook}" method="POST">
+    <label for="name">Title:</label>
+    <input type="text" id="name" th:field="*{name}">
+    <div th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}">Error</div>
+
+    <label for="author">Author:</label>
+    <select id="author" th:field="*{author}">
+        <option value="" disabled>Select an Author</option>
+        <option th:each="auth : ${authors}"
+                th:value="${auth.id}"
+                th:text="${auth.name}"></option>
+    </select>
+    <div th:if="${#fields.hasErrors('author')}" class="error" th:errors="*{author}">Error</div>
+
+    <label for="genre">Genre:</label>
+    <select id="genre" th:field="*{genre}">
+        <option value="" disabled>Select a Genre</option>
+        <option th:each="genre : ${genres}"
+                th:value="${genre.id}"
+                th:text="${genre.name}"></option>
+    </select>
+    <div th:if="${#fields.hasErrors('genre')}" class="error" th:errors="*{genre}">Error</div>
+
+    <label for="sku">SKU:</label>
+    <input type="number" id="sku" th:field="*{sku}">
+    <div th:if="${#fields.hasErrors('sku')}" class="error" th:errors="*{sku}">Error</div>
+
+    <label for="isbn">ISBN:</label>
+    <input type="text" id="isbn" th:field="*{isbn}" maxlength="20">
+    <div th:if="${#fields.hasErrors('isbn')}" class="error" th:errors="*{isbn}">Error</div>
+
+    <label for="pages">Pages:</label>
+    <input type="number" id="pages" th:field="*{pages}">
+    <div th:if="${#fields.hasErrors('pages')}" class="error" th:errors="*{pages}">Error</div>
+
+    <label for="publicationYear">Publication Year:</label>
+    <input type="number" id="publicationYear" th:field="*{publicationYear}">
+    <div th:if="${#fields.hasErrors('publicationYear')}" class="error" th:errors="*{publicationYear}">Error</div>
+
+    <label for="size">Size:</label>
+    <input type="text" id="size" th:field="*{size}" maxlength="50">
+    <div th:if="${#fields.hasErrors('size')}" class="error" th:errors="*{size}">Error</div>
+
+    <label for="weight">Weight (kg):</label>
+    <input type="number" step="0.01" id="weight" th:field="*{weight}">
+    <div th:if="${#fields.hasErrors('weight')}" class="error" th:errors="*{weight}">Error</div>
+
+    <label for="annotation">Annotation:</label>
+    <textarea id="annotation" th:field="*{annotation}" rows="4"></textarea>
+    <div th:if="${#fields.hasErrors('annotation')}" class="error" th:errors="*{annotation}">Error</div>
+
+    <button type="submit">Create Book</button>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Top and Bottom Successful Authors</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body class="flex-body">
+
+<div class="flex-container">
+  <div class="controls gap-50">
+    <div class="panel">
+      <button><a th:href="@{/}"><i class="material-icons">arrow_back_ios_new</i>To Main</a></button>
+    </div>
+  </div>
+
+  <h1>Top and Bottom Successful Authors</h1>
+
+  <h2>Top Authors</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Total Sales</th>
+      <th>Total Books Printed</th>
+      <th>Completed Orders</th>
+      <th>Total Orders</th>
+      <th>Completed Percentage</th>
+      <th>Rank by Sales</th>
+      <th>Rank by Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="author : ${topAuthors}">
+      <td th:text="${author.authorName}"></td>
+      <td th:text="${#numbers.formatDecimal(author.totalSalesValue / 1000, 0, 1) + 'K'}"></td>
+      <td th:text="${author.totalBooksPrinted}"></td>
+      <td th:text="${author.completedOrdersCount}"></td>
+      <td th:text="${author.totalOrdersCount}"></td>
+      <td th:text="${author.completedOrdersPercentage}"></td>
+      <td th:text="${author.finalRankBySales}"></td>
+      <td th:text="${author.finalRankByQuantity}"></td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(topAuthors)}">
+      <td colspan="8">No top authors found for the selected genre.</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h2>Bottom Authors</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Total Sales</th>
+      <th>Total Books Printed</th>
+      <th>Completed Orders</th>
+      <th>Total Orders</th>
+      <th>Completed Percentage</th>
+      <th>Rank by Sales</th>
+      <th>Rank by Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="author : ${bottomAuthors}">
+      <td th:text="${author.authorName}"></td>
+      <td th:text="${#numbers.formatDecimal(author.totalSalesValue / 1000, 0, 1) + 'K'}"></td>
+      <td th:text="${author.totalBooksPrinted}"></td>
+      <td th:text="${author.completedOrdersCount}"></td>
+      <td th:text="${author.totalOrdersCount}"></td>
+      <td th:text="${author.completedOrdersPercentage}"></td>
+      <td th:text="${author.finalRankBySales}"></td>
+      <td th:text="${author.finalRankByQuantity}"></td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(bottomAuthors)}">
+      <td colspan="8">No bottom authors found for the selected genre.</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

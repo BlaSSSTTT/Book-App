@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Batch Print</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="flex-body">
+
+<h1>Edit Batch Print</h1>
+
+<form th:action="@{/batches/edit/{id}(id=${updBatchPrint.id})}" th:object="${updBatchPrint}" method="POST">
+    <input type="hidden" name="_method" value="put">
+    <input type="hidden" name="id" th:value="${updBatchPrint.id}">
+
+    <label for="number">Batch Print Number:</label>
+    <input type="text" id="number" name="number" th:value="${updBatchPrint.number}" th:field="*{number}">
+    <div th:if="${#fields.hasErrors('number')}" class="error" th:errors="*{number}">Error</div>
+
+    <label for="bookQuantity">Book Quantity:</label>
+    <input type="number" id="bookQuantity" name="bookQuantity" th:value="${updBatchPrint.bookQuantity}" th:field="*{bookQuantity}">
+    <div th:if="${#fields.hasErrors('bookQuantity')}" class="error" th:errors="*{bookQuantity}">Error</div>
+
+    <label for="order">Order:</label>
+    <select id="order" name="order" th:field="*{order}">
+        <option value="" disabled>Select an Order</option>
+        <option th:each="ord : ${orders}"
+                th:value="${ord.id}"
+                th:text="${ord.number}"
+                th:selected="${ord.id == updBatchPrint.order.id}"></option>
+    </select>
+    <div th:if="${#fields.hasErrors('order')}" class="error" th:errors="*{order}">Error</div>
+
+    <label for="printDate">Print Date:</label>
+    <input type="date" id="printDate" name="printDate" th:value="${#temporals.format(updBatchPrint.printDate, 'yyyy-MM-dd')}" th:field="*{printDate}">
+    <div th:if="${#fields.hasErrors('printDate')}" class="error" th:errors="*{printDate}">Error</div>
+
+    <label for="qualityMark">Quality Mark:</label>
+    <select id="qualityMark" name="qualityMark" th:field="*{qualityMark}">
+        <option value="" disabled>Select a Quality Mark</option>
+        <option th:each="qm : ${qualityMarks}"
+                th:value="${qm.id}"
+                th:text="${qm.name}"
+                th:selected="${qm.id == updBatchPrint.qualityMark.id}"></option>
+    </select>
+    <div th:if="${#fields.hasErrors('qualityMark')}" class="error" th:errors="*{qualityMark}">Error</div>
+
+    <button type="submit">Save Changes</button>
+</form>
+
+</body>
+</html>

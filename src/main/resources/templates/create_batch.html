@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Batch Print</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="flex-body">
+
+<h1>Create New Batch Print</h1>
+
+<form th:action="@{/batches/create}" th:object="${newBatchPrint}" method="POST">
+    <label for="number">Batch Number:</label>
+    <input type="text" id="number" th:field="*{number}">
+    <div th:if="${#fields.hasErrors('number')}" class="error" th:errors="*{number}">Error</div>
+
+    <label for="bookQuantity">Book Quantity:</label>
+    <input type="number" id="bookQuantity" th:field="*{bookQuantity}">
+    <div th:if="${#fields.hasErrors('bookQuantity')}" class="error" th:errors="*{bookQuantity}">Error</div>
+
+    <label for="order">Order:</label>
+    <select id="order" name="order" th:field="*{order}">
+        <option value="" disabled>Select an Order</option>
+        <option th:each="ord : ${orders}"
+                th:value="${ord.id}"
+                th:text="${ord.number}"
+                th:selected="${newBatchPrint.order != null and ord.id == newBatchPrint.order.id}"></option>
+    </select>
+    <div th:if="${#fields.hasErrors('order')}" class="error" th:errors="*{order}">Error</div>
+
+    <label for="printDate">Print Date:</label>
+    <input type="date" id="printDate" th:field="*{printDate}">
+    <div th:if="${#fields.hasErrors('printDate')}" class="error" th:errors="*{printDate}">Error</div>
+
+    <label for="qualityMark">Quality Mark:</label>
+    <select id="qualityMark" name="qualityMark" th:field="*{qualityMark}">
+        <option value="" disabled>Select a Quality Mark</option>
+        <option th:each="qm : ${qualityMarks}"
+                th:value="${qm.id}"
+                th:text="${qm.name}"
+                th:selected="${newBatchPrint.qualityMark != null and qm.id == newBatchPrint.qualityMark.id}"></option>
+    </select>
+    <div th:if="${#fields.hasErrors('qualityMark')}" class="error" th:errors="*{qualityMark}">Error</div>
+
+    <button type="submit">Create Batch Print</button>
+</form>
+
+</body>
+</html>

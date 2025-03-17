@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet">
+</head>
+<body class="flex-body">
+
+<div class="flex-container height-100">
+  <h1>Welcome to the Main Page</h1>
+
+  <div class="panel margin-bottom">
+    <button><a th:href="@{/orders}">Go to Orders<i class="material-icons">list_alt</i></a></button>
+    <button><a th:href="@{/books}">Go to Books<i class="material-icons">library_books</i></a></button>
+    <button><a th:href="@{/batches}">Go to Batches<i class="material-icons">print</i></a></button>
+</div>
+  <form th:action="@{/authors/top-and-bottom}" method="get" class="inline-form invisible-form">
+    <label for="genreId">Select Genre:</label>
+    <select name="genreId" id="genreId" required>
+      <option value="" disabled selected>Select a genre</option>
+      <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}"></option>
+    </select>
+    <button type="submit">Best and Worst Authors By Genre<i class="material-icons">account_tree</i></button>
+  </form>  </div>
+</div>
+
+
+</body>
+</html>

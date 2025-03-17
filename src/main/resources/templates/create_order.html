@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Order</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="flex-body">
+
+<h1>Create New Order</h1>
+
+<form th:action="@{/orders/create}" th:object="${newOrder}" method="POST">
+    <label for="number">Order Number:</label>
+    <input type="text" id="number" th:field="*{number}">
+    <div th:if="${#fields.hasErrors('number')}" class="error" th:errors="*{number}">Error</div>
+
+    <label for="price">Expected Price:</label>
+    <input type="number" id="price" th:field="*{price}">
+    <div th:if="${#fields.hasErrors('price')}" class="error" th:errors="*{price}">Error</div>
+
+    <label for="printType">Print Type:</label>
+    <select id="printType" th:field="*{printType}">
+        <option value="" disabled>Select a Print Type</option>
+        <option th:each="type : ${printTypes}"
+                th:value="${type.id}"
+                th:text="${type.name}"></option>
+    </select>
+    <div th:if="${#fields.hasErrors('printType')}" class="error" th:errors="*{printType}">Error</div>
+
+    <label for="paperType">Paper Type:</label>
+    <select id="paperType" th:field="*{paperType}">
+        <option value="" disabled>Select a Paper Type</option>
+        <option th:each="type : ${paperTypes}"
+                th:value="${type.id}"
+                th:text="${type.name}"></option>
+    </select>
+    <div th:if="${#fields.hasErrors('paperType')}" class="error" th:errors="*{paperType}">Error</div>
+
+    <label for="coverType">Cover Type:</label>
+    <select id="coverType" th:field="*{coverType}">
+        <option value="" disabled>Select a Cover Type</option>
+        <option th:each="type : ${coverTypes}"
+                th:value="${type.id}"
+                th:text="${type.name}"></option>
+    </select>
+    <div th:if="${#fields.hasErrors('coverType')}" class="error" th:errors="*{coverType}">Error</div>
+
+    <label for="fasteningType">Fastening Type:</label>
+    <select id="fasteningType" th:field="*{fasteningType}">
+        <option value="" disabled>Select a Fastening Type</option>
+        <option th:each="type : ${fasteningTypes}"
+                th:value="${type.id}"
+                th:text="${type.name}"></option>
+    </select>
+    <div th:if="${#fields.hasErrors('fasteningType')}" class="error" th:errors="*{fasteningType}">Error</div>
+
+    <label for="isLaminated">Is Laminated:</label>
+    <input type="checkbox" id="isLaminated" th:field="*{isLaminated}">
+    <div th:if="${#fields.hasErrors('isLaminated')}" class="error" th:errors="*{isLaminated}">Error</div>
+
+    <label for="registrationDate">Registration Date:</label>
+    <input type="date" id="registrationDate" th:field="*{registrationDate}">
+    <div th:if="${#fields.hasErrors('registrationDate')}" class="error" th:errors="*{registrationDate}">Error</div>
+
+    <label for="completionDate">Completion Date:</label>
+    <input type="date" id="completionDate" th:field="*{completionDate}">
+    <div th:if="${#fields.hasErrors('completionDate')}" class="error" th:errors="*{completionDate}">Error</div>
+
+    <label for="customer">Customer:</label>
+    <select id="customer" th:field="*{customer}">
+        <option value="" disabled>Select a Customer</option>
+        <option th:each="cust : ${customers}"
+                th:value="${cust.id}"
+                th:text="${cust.name}"></option>
+    </select>
+    <div th:if="${#fields.hasErrors('customer')}" class="error" th:errors="*{customer}">Error</div>
+
+    <label for="employee">Employee:</label>
+    <select id="employee" th:field="*{employee}">
+        <option value="" disabled>Select an Employee</option>
+        <option th:each="emp : ${employees}"
+                th:value="${emp.id}"
+                th:text="${emp.fullName}"></option>
+    </select>
+    <div th:if="${#fields.hasErrors('employee')}" class="error" th:errors="*{employee}">Error</div>
+
+    <label for="orderStatus">Order Status:</label>
+    <select id="orderStatus" th:field="*{orderStatus}">
+        <option value="" disabled>Select an Order Status</option>
+        <option th:each="os : ${orderStatuses}"
+                th:value="${os.id}"
+                th:text="${os.name}"></option>
+    </select>
+    <div th:if="${#fields.hasErrors('orderStatus')}" class="error" th:errors="*{orderStatus}">Error</div>
+
+    <button type="submit">Create Order</button>
+</form>
+
+</body>
+</html>
