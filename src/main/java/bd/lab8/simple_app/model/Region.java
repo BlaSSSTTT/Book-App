@@ -22,6 +22,11 @@ public class Region {
     @Column(name = "region_id", nullable = false)
     private Long id;
 
+
+
+
+
+
     @Nationalized
     @Column(name = "name")
     private String name;
